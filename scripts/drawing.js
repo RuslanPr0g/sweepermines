@@ -27,7 +27,7 @@ function drawMenu() {
     }
 
     y = 125;
-    ctx.font = "1em sans-serif";
+    ctx.font = "1em Segoe UI";
 
     for (let d in difficulties) {
         if (difficulties[d].bestTime == 0) {
@@ -41,7 +41,7 @@ function drawMenu() {
             }
             bestTime += Math.floor(t / 1000) +
                 "." + (t % 1000);
-            ctx.fillText("Nice one - " + bestTime, canvas_width / 2, y);
+            ctx.fillText("Nice one - " + bestTime, canvas_width / 2, y + 5);
 		}
 		
         y += 80;
@@ -65,7 +65,8 @@ function drawPlaying() {
 
     if (gameState.screen != 'lost') {
         ctx.textAlign = "left";
-        ctx.fillText("Remained mines: " + cDiff.mines, canvas_width / 9, 90);
+
+        ctx.fillText("Remained mines: " + (cDiff.mines - flagged), canvas_width / 9, 90);
 
         let whichT = (gameState.screen == 'won' ? gameState.timeTaken : gameTime);
         let t = '';
@@ -95,6 +96,8 @@ function drawPlaying() {
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
 
+    flagged = 0;
+
     for (let i in grid) {
         let CX = offsetX + (grid[i].x * gameState.cellWidth);
         let CY = offsetY + (grid[i].y * gameState.cellHeight);
@@ -122,8 +125,10 @@ function drawPlaying() {
 
             if (grid[i].currentState == 'flagged') {
                 ctx.fillStyle = "#DA0700";
-				
-				let img = document.getElementById("scream");
+
+                flagged += 1;
+
+                let img = document.getElementById("scream");
 				ctx.drawImage(img, CX, CY, gameState.cellWidth, gameState.cellHeight);
             }
         }

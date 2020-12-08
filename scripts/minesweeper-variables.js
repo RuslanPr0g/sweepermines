@@ -10,6 +10,8 @@ let currentSecond = 0,
 let offsetX = 0,
     offsetY = 0;
 
+let flagged = 0;
+
 let grid = [];
 
 let canvas_width = document.getElementsByTagName('canvas')[0].width;

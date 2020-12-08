@@ -35,7 +35,7 @@ let difficulties = {
         name: "Impossible",
         width: 15,
         height: 15,
-        mines: 140,
+        mines: 80,
         bestTime: 0,
         menuBox: [0, 0]
     }
